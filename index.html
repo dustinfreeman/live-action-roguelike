@@ -9,20 +9,25 @@
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
-    <p>Dustin is here.</p>
-    <video src=" dustin_test_video.webm" width="500px" controls>
-        <p>
-            Your browser doesn't support HTML video.
-        </p>
-    </video>
+    <!-- <p>Dustin is here.</p> -->
 
     <a-scene embedded arjs>
         <a-marker preset="hiro">
-            <a-entity position="0 0 0" scale="0.05 0.05 0.05"
-                gltf-model="../AR.js/aframe/examples/image-tracking/nft/trex/scene.gltf"></a-entity>
+            <!-- <a-entity position="0 0 0" scale="0.05 0.05 0.05"
+                gltf-model="../AR.js/aframe/examples/image-tracking/nft/trex/scene.gltf"></a-entity> -->
+            <a-video id="video" width="1.6" height="0.9" rotation="-90 0 0" crossorigin="anonymous"
+                src="dustin_test_video.webm" loop="true">
+            </a-video>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        window.addEventListener('click', function () {
+            console.log('click')
+            document.querySelector('#video').play();
+        });
+    </script>
 
 </body>
 

@@ -12,22 +12,68 @@
 
 <body>
     <!-- <p>Dustin is here.</p> -->
-
     <a-scene vr-mode-ui="enabled: false" arjs>
+        <a-assets>
+            <video id="camera2" playsinline></video>
+        </a-assets>
+
+        <a-entity camera></a-entity>
+
+        <!-- <a-marker type="pattern" preset="custom" url="ARJS-marker.patt"> -->
         <a-marker preset="hiro">
             <!-- <a-entity position="0 0 0" scale="0.05 0.05 0.05"
                 gltf-model="../AR.js/aframe/examples/image-tracking/nft/trex/scene.gltf"></a-entity> -->
-            <a-video id="video" width="1.6" height="0.9" rotation="-90 0 0" crossorigin="anonymous" muted loop="true"
+
+            <!-- PRERECORDED -->
+            <!-- <a-video id="video" width="1.6" height="0.9" rotation="-90 0 0" crossorigin="anonymous" muted loop="true"
                 src="dustin_test_video.webm">
-            </a-video>
+            </a-video> -->
+
+
+            <!-- LIVE -->
+            <a-plane position="0 0 0" rotation="-90 0 0" shadow material="src: #camera2"></a-plane>
+
         </a-marker>
-        <a-entity camera></a-entity>
+
     </a-scene>
+
+    <script>
+        navigator.mediaDevices.enumerateDevices().then((value) => {
+            var webcams = value.filter(device => device.kind === 'videoinput')
+            for (const [index, w] of webcams.entries()) {
+                console.log(index, w);
+                if (w.label.includes('OBS') || w.label.includes('Logi Capture')) {
+                    continue;
+                }
+
+                if (index !== 2) {
+                    continue;
+                }
+
+                navigator.mediaDevices.getUserMedia({
+                    video: {
+                        deviceId: { exact: w.deviceId }
+                    }
+                }).then(function (stream) {
+                    var videoDiv = document.getElementById("camera2");
+                    videoDiv.autoplay = true;
+                    videoDiv.muted = true;
+                    videoDiv.srcObject = stream;
+                    videoDiv.onloadedmetadata = () => {
+                        videoDiv.play();
+                    }
+                })
+                    .catch(function (err0r) {
+                        console.log("Something went wrong!", err0r);
+                    });
+            }
+        })
+    </script>
 
     <script>
         window.addEventListener('click', function () {
             console.log('click')
-            document.querySelector('#video').play();
+            // document.querySelector('#video').play();
         });
     </script>
 

@@ -8,15 +8,17 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 
-<body style="margin : 0px; overflow: hidden;">
+<!-- <body style="margin : 0px; overflow: hidden;"> -->
+
+<body>
     <!-- <p>Dustin is here.</p> -->
 
-    <a-scene embedded arjs>
+    <a-scene vr-mode-ui="enabled: false" arjs>
         <a-marker preset="hiro">
             <!-- <a-entity position="0 0 0" scale="0.05 0.05 0.05"
                 gltf-model="../AR.js/aframe/examples/image-tracking/nft/trex/scene.gltf"></a-entity> -->
-            <a-video id="video" width="1.6" height="0.9" rotation="-90 0 0" crossorigin="anonymous"
-                src="dustin_test_video.webm" loop="true">
+            <a-video id="video" width="1.6" height="0.9" rotation="-90 0 0" crossorigin="anonymous" muted loop="true"
+                src="dustin_test_video.webm">
             </a-video>
         </a-marker>
         <a-entity camera></a-entity>

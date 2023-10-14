@@ -1,0 +1,67 @@
+<html>
+
+<body>
+    <!-- <div id="camholder">
+        cameras
+        <video id="preview" width="160" height="120" autoplay muted></video>
+    </div> -->
+
+    <!-- <div class="left">
+        <div id="startButton" class="button">Start Recording</div>
+        <h2>Preview</h2>
+        <video id="preview" width="360" autoplay muted></video>
+    </div> -->
+
+    <script>
+        // var video = document.querySelector("#preview");
+        // if (navigator.mediaDevices.getUserMedia) {
+        //     navigator.mediaDevices.getUserMedia({ video: true })
+        //         .then(function (stream) {
+        //             video.srcObject = stream;
+        //         })
+        //         .catch(function (err0r) {
+        //             console.log("Something went wrong!", err0r);
+        //         });
+        // }
+
+        navigator.mediaDevices.enumerateDevices().then((value) => {
+            var webcams = value.filter(device => device.kind === 'videoinput')
+
+            for (const [index, w] of webcams.entries()) {
+                console.log(w);
+                if (w.label.includes('OBS') || w.label.includes('Logi Capture')) {
+                    continue;
+                }
+
+                navigator.mediaDevices.getUserMedia({
+                    video: {
+                        deviceId: { exact: w.deviceId }
+                    }
+                }).then(function (stream) {
+                    var divDiv = document.createElement("div");
+                    divDiv.innerHTML = w.deviceId;
+                    divDiv.appendChild(document.createElement("br"));
+                    var videoDiv = document.createElement("video");
+                    videoDiv.width = "300";
+                    videoDiv.autoplay = true;
+                    videoDiv.muted = true;
+
+                    videoDiv.srcObject = stream;
+                    divDiv.appendChild(videoDiv);
+                    document.body.appendChild(divDiv);
+                })
+                    .catch(function (err0r) {
+                        console.log("Something went wrong!", err0r);
+                    });
+            }
+        })
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

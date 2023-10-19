@@ -4,7 +4,4 @@
 $ live-server
 ```
 
-1. Open web browser to: 127.0.0.1:8080
-2. Open OBS
-    a. Start Virtual Camera
-    
+[Running Instructions](https://www.notion.so/dustinfreeman/Live-Action-Roguelike-Running-Steps-e96dd738d837477cae4e6d3bff0ff95f?pvs=4) 

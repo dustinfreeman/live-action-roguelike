@@ -8,3 +8,7 @@ body {}
 .rotate90cw {
     transform: rotate(90deg);
 }
+
+.video-dj {
+    height: 300px;
+}
